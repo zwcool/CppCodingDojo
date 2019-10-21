@@ -1,6 +1,6 @@
-set(src fromRomanNumerals.cpp)
-set(include fromRomanNumerals.h)
+set(src consoleToFile.cpp)
+set(include consoleToFile.h)
 
-add_library(fromRomanNumerals SHARED ${include} ${src})
+add_library(consoleToFile SHARED ${include} ${src})
 
-install(TARGETS fromRomanNumerals DESTINATION lib)
+install(TARGETS consoleToFile DESTINATION lib)

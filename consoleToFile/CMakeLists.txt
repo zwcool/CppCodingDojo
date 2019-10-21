@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.10)
 
-project(fromRomanNumerals)
-#add_subdirectory(lib)
-add_subdirectory(test)
-#add_subdirectory(app)
+project(consoleToFile)
+add_subdirectory(lib)
+# add_subdirectory(test)
+add_subdirectory(app)
