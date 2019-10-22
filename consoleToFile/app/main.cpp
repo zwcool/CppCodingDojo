@@ -35,8 +35,8 @@ int main ()
             std::unique_lock<std::mutex> lock(mtx);
             std::cout << "Write something..." << std::endl;
             std::string input;
-            std::cin >> input;
-            input += "\n"; // Each new line after nen returned input
+            std::getline(std::cin, input);
+            input += "\n";                  // Each new line after nen returned input
             produced_input.push(input);
             is_notified = true;
             cond_var.notify_one();
