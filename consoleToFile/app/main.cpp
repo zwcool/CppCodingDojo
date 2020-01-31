@@ -32,7 +32,7 @@ int main ()
     std::future<bool> func = prm.get_future();
     std::thread producer ([&]() {
         while(!console_has_close)
-        {
+        { 
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
             std::cout << "Write something..." << std::endl;
             std::string input;
@@ -40,6 +40,7 @@ int main ()
             input += "\n";                  // Each new line after nen returned input
             produced_input.push(input);
             prm.set_value(true);
+            prm = std::promise<bool> ();
         }
     });
 
@@ -47,13 +48,10 @@ int main ()
         while(!console_has_close)
         {
             func.wait();
-            if(func.get())
+            while (!produced_input.empty())
             {
-                while (!produced_input.empty())
-                {
-                    writeToFile(produced_input.front());
-                    produced_input.pop();
-                }
+                writeToFile(produced_input.front());
+                produced_input.pop();
             }
         }
     });
