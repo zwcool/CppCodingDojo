@@ -18,10 +18,6 @@ void writeToFile(std::string input)
     }
 }
 
-/* std::future with std::promise are supposed to not work within a loop
-   See for more details:
-   https://stackoverflow.com/questions/45649987/stdfuture-error-when-using-stdpromise
-*/
 int main ()
 {
     std::queue<std::string> produced_input;
