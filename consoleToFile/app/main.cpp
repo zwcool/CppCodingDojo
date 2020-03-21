@@ -41,7 +41,6 @@ int main ()
         while(!console_has_close)
         {
             writeToFile(func.get());
-            std::cout << "Check" << std::endl;
             func = prm.get_future();
         }
     });
