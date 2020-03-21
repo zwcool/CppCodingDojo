@@ -18,14 +18,12 @@ void writeToFile(std::string input)
     }
 }
 
+
 int main ()
 {
-    std::queue<std::string> produced_input;
-    bool is_done = false;
-    bool is_notified = false;
     bool console_has_close = false;
-    std::promise<bool> prm;
-    std::future<bool> func = prm.get_future();
+    std::promise<std::string> prm;
+    auto func = prm.get_future();
     std::thread producer ([&]() {
         while(!console_has_close)
         { 
@@ -34,21 +32,17 @@ int main ()
             std::string input;
             std::getline(std::cin, input);
             input += "\n";                  // Each new line after nen returned input
-            produced_input.push(input);
-            prm.set_value(true);
-            prm = std::promise<bool> ();
+            prm.set_value(input);
+            prm = std::promise<std::string> ();
         }
     });
 
     std::thread consumer([&]() {
         while(!console_has_close)
         {
-            func.wait();
-            while (!produced_input.empty())
-            {
-                writeToFile(produced_input.front());
-                produced_input.pop();
-            }
+            writeToFile(func.get());
+            std::cout << "Check" << std::endl;
+            func = prm.get_future();
         }
     });
 
@@ -57,9 +51,9 @@ int main ()
 }
 
 
-
-/*  ###################################################
-    ############## condition_variables ################
+/*
+    ###################################################
+   ############## condition_variables ################
     ###################################################
 
 
@@ -127,7 +121,4 @@ int main ()
 
     producer.join();
     consumer.join();
-}
-
-*/
-
+}*/
