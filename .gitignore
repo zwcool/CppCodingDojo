@@ -1,2 +1,9 @@
 fromRomanNumerals/build/**
 */build/**
+*.cmake
+CMakeFiles/
+console-output.txt
+CMakeCache.txt
+myApp
+Makefile
+*.so
